@@ -16,12 +16,12 @@ import javax.validation.Valid;
 @RequestMapping("/myValidation")
 public class MyController {
   @PostMapping
-  public ResponseEntity<Object> insert(@RequestBody @Valid Employee employee){
+  public ResponseEntity<Object> insert(@Valid @RequestBody  Employee employee){
     return ResponseEntity.ok(Result.success(employee));
   }
 
-  @PostMapping(value = "/default")
-  public ResponseEntity<Object> insert(@RequestBody @Valid DefaultMessageOrder order){
+  @PostMapping(value = "/i18n")
+  public ResponseEntity<Object> insert(@Valid @RequestBody  DefaultMessageOrder order){
     return ResponseEntity.ok(Result.success(order));
   }
 }

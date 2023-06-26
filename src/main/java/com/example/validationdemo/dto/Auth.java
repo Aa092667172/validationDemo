@@ -16,7 +16,7 @@ public class Auth {
   @NotNull(message = "手機號碼不得為空")
   private String phoneNumber;
   @Valid
-  @Size(message = "書本1需介於{min}與{max}之間",min = 1,max = 3)
+  @Size(message = "書本集合1需介於{min}與{max}之間",min = 1,max = 3)
   @NotEmpty(message = "bookList不得為null")
   private List<Book> bookList;
   @Valid

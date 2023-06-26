@@ -17,17 +17,15 @@ public class Order {
   /**
    * insert驗證群組
    */
-  public interface Insert {
-
-  }
+  public interface Insert {}
 
   /**
    * update驗證群組
    * 默認皆為Default群組
    */
-  public interface Update extends Default {
+  public interface Update extends Default {}
 
-  }
+
   @Pattern(regexp = "^[/d]{4}-[/d]{2}-[/d]{2}$",message ="日期需為yyyy-MM-dd")
   @NotBlank(message = "日期不得為空")
   private String date;

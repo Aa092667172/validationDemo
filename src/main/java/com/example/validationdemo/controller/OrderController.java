@@ -5,6 +5,8 @@ import com.example.validationdemo.dto.OrderExtend;
 import com.example.validationdemo.dto.Result;
 import com.example.validationdemo.exception.ProjectException;
 import com.example.validationdemo.service.OrderService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -27,9 +29,10 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/order")
 @Validated
+@RequiredArgsConstructor
+@Slf4j
 public class OrderController {
-  @Autowired
-  private OrderService orderService;
+  private final OrderService orderService;
 
   @PostMapping
   public ResponseEntity<Object> insertOrder(@Validated(Order.Insert.class)
@@ -37,7 +40,7 @@ public class OrderController {
     return ResponseEntity.ok(Result.success(order));
   }
 
-  @PostMapping("/extend")
+  @PostMapping("/extends")
   public ResponseEntity<Object> insertOrder(@Validated(Order.Update.class)
                                                           @RequestBody OrderExtend order){
     return ResponseEntity.ok(Result.success(order));
@@ -99,9 +102,9 @@ public class OrderController {
   @PostMapping("/bindError")
   public ResponseEntity<Object> bindError(@Validated @RequestBody Order order, BindingResult bindingResult
                                           ){
-    System.out.println(bindingResult.getAllErrors());
-    System.out.println(bindingResult.hasErrors());
-    System.out.println(bindingResult.getErrorCount());
+    log.info("bindingResult.getAllErrors()",bindingResult.getAllErrors());
+    log.info("bindingResult.hasErrors()",bindingResult.hasErrors());
+    log.info("bindingResult.getErrorCount()",bindingResult.getErrorCount());
 
     if (bindingResult.hasErrors()) {
       //do something and then

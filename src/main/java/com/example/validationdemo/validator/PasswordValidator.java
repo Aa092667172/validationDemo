@@ -1,6 +1,7 @@
 package com.example.validationdemo.validator;
 
 import com.example.validationdemo.annotation.Password;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -8,6 +9,7 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * 自製密碼驗證Validator
  */
+@Slf4j
 public class PasswordValidator implements ConstraintValidator<Password,String> {
   private Password password;
 
@@ -18,7 +20,7 @@ public class PasswordValidator implements ConstraintValidator<Password,String> {
   }
 
   /**
-   *
+   * true代表驗證通過
    * @param value object to validate
    * @param context context in which the constraint is evaluated
    *
@@ -41,21 +43,27 @@ public class PasswordValidator implements ConstraintValidator<Password,String> {
     }
 
     String defaultConstraintMessageTemplate = context.getDefaultConstraintMessageTemplate();
-    System.out.println(defaultConstraintMessageTemplate);
+    log.info(defaultConstraintMessageTemplate);
     boolean isError = true;
 
     if(numberCount < password.number()){
-      ConstraintValidatorContext.ConstraintViolationBuilder constraintViolationBuilder = context.buildConstraintViolationWithTemplate(String.format("需包含%d個數字", password.number()));
+      ConstraintValidatorContext.ConstraintViolationBuilder constraintViolationBuilder =
+          context.buildConstraintViolationWithTemplate(String.format("需包含%d個數字",
+              password.number()));
       constraintViolationBuilder.addConstraintViolation();
       isError = false;
     }
     if(lowerCount < password.lowerLetter()){
-      ConstraintValidatorContext.ConstraintViolationBuilder constraintViolationBuilder = context.buildConstraintViolationWithTemplate(String.format("需包含%d個小寫字母", password.lowerLetter()));
+      ConstraintValidatorContext.ConstraintViolationBuilder constraintViolationBuilder =
+          context.buildConstraintViolationWithTemplate(String.format("需包含%d個小寫字母",
+              password.lowerLetter()));
       constraintViolationBuilder.addConstraintViolation();
       isError = false;
     }
     if(upperCount < password.upperLetter()){
-      ConstraintValidatorContext.ConstraintViolationBuilder constraintViolationBuilder = context.buildConstraintViolationWithTemplate(String.format("需包含%d個大寫字母", password.upperLetter()));
+      ConstraintValidatorContext.ConstraintViolationBuilder constraintViolationBuilder =
+          context.buildConstraintViolationWithTemplate(String.format("需包含%d個大寫字母",
+              password.upperLetter()));
       constraintViolationBuilder.addConstraintViolation();
       isError = false;
     }

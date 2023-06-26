@@ -61,11 +61,11 @@ public class GlobalExceptionHandler {
 
 
   /**
-   * 控制器中使用@Valid,@Validated注解方法参数，且参数驗證失敗
+   * 控制器中使用@Valid,@Validated + @RequestBody 注解方法参数，且参数驗證失敗
    */
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity<Object> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
-    log.info("進入methodArgumentNotValidExceptionHandler",e);
+    log.info("進入methodArgumentNotValidExceptionHandler");
     List<String> errorMessages = getErrorMessages(e.getBindingResult());
     HashMap<String, List<String>> errorMap = new HashMap<>();
     errorMap.put("格式錯誤",errorMessages);
@@ -74,26 +74,12 @@ public class GlobalExceptionHandler {
   }
 
   /**
-   * 取得錯誤訊息
-   * @param e
-   * @return
-   */
-  private static List<String> getErrorMessages(BindingResult e) {
-    return e.getFieldErrors()
-        .stream()
-        .map(fieldError -> fieldError.getField() + ":" + fieldError.getDefaultMessage())
-        .collect(Collectors.toList());
-  }
-
-  /**
    * 數據綁定驗證不合規 参数绑定失败或出现错误
-   * 1.表單數據綁定 @ModelAttribute
-   * 2.請求參數綁定 @RequestParam @PathVariable
-   * 3.配置文件绑定 @ConfigurationProperties 綁定到javaBean 配置文件属性
+   * 表單數據綁定 @ModelAttribute
    */
   @ExceptionHandler(BindException.class)
   public ResponseEntity<Object> bindExceptionExceptionHandler(BindException e) {
-    log.info("進入BindException",e);
+    log.info("進入BindException");
     List<String> errorMessages = getErrorMessages(e.getBindingResult());
     HashMap<String, List<String>> errorMap = new HashMap<>();
     errorMap.put("格式錯誤",errorMessages);
@@ -131,7 +117,7 @@ public class GlobalExceptionHandler {
    */
   @ExceptionHandler(ConstraintViolationException.class)
   public ResponseEntity<Object> constraintViolationExceptionHandler(ConstraintViolationException e) {
-    log.info("進入constraintViolationExceptionHandler",e);
+    log.info("進入constraintViolationExceptionHandler");
     List<String> errorMessages = e.getConstraintViolations()
         .stream()
         .map(filed -> filed.getPropertyPath() + ":" + filed.getMessage())
@@ -156,5 +142,17 @@ public class GlobalExceptionHandler {
     HashMap<String, Object> map = new HashMap<>();
     map.put("系統錯誤", "請與系統管理員聯絡");
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+  }
+
+  /**
+   * 取得錯誤訊息
+   * @param e
+   * @return
+   */
+  private static List<String> getErrorMessages(BindingResult e) {
+    return e.getFieldErrors()
+        .stream()
+        .map(fieldError -> fieldError.getField() + ":" + fieldError.getDefaultMessage())
+        .collect(Collectors.toList());
   }
 }
