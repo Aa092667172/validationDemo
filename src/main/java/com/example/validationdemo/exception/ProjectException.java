@@ -7,7 +7,7 @@ import lombok.Getter;
  */
 @Getter
 public class ProjectException extends RuntimeException {
-  private String code;
+  private final String code;
 
   public ProjectException(String msg,String code){
     super(msg);

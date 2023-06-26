@@ -83,8 +83,7 @@ public class GlobalExceptionHandler {
     List<String> errorMessages = getErrorMessages(e.getBindingResult());
     HashMap<String, List<String>> errorMap = new HashMap<>();
     errorMap.put("格式錯誤",errorMessages);
-    return ResponseEntity.badRequest()
-        .body(errorMap);
+    return ResponseEntity.badRequest().body(errorMap);
   }
 
   /**
@@ -146,8 +145,8 @@ public class GlobalExceptionHandler {
 
   /**
    * 取得錯誤訊息
-   * @param e
-   * @return
+   * @param e 封裝的BindingResult
+   * @return BindingResult 中的屬性錯誤
    */
   private static List<String> getErrorMessages(BindingResult e) {
     return e.getFieldErrors()
