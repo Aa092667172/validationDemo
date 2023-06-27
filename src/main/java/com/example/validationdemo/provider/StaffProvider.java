@@ -18,9 +18,9 @@ public class StaffProvider implements DefaultGroupSequenceProvider<Staff> {
     Optional.ofNullable(staff)
         .map(Staff::getIsEnable)
         .ifPresent(value->{
-          if (staff.getIsEnable().equals("Y")) {
+          if (value.equals("Y")) {
             defaultGroupSequence.add(Staff.EnableValidation.class);
-          } else if (staff.getIsEnable().equals("N")) {
+          } else if (value.equals("N")) {
             defaultGroupSequence.add(Staff.NotEnableValidation.class);
           }
         });
