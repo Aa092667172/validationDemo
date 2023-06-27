@@ -61,7 +61,7 @@ public class GlobalExceptionHandler {
 
 
   /**
-   * 控制器中使用@Valid,@Validated + @RequestBody 注解方法参数，且参数驗證失敗
+   * 控制器中使用@Valid,@Validated + @RequestBody 非java Bean 注解方法参数，且参数驗證失敗
    */
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity<Object> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
