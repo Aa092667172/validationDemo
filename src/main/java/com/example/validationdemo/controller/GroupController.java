@@ -2,7 +2,6 @@ package com.example.validationdemo.controller;
 
 import com.example.validationdemo.dto.Result;
 import com.example.validationdemo.dto.Staff;
-import com.example.validationdemo.dto.Supervisor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
