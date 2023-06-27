@@ -1,5 +1,6 @@
 package com.example.validationdemo.dto;
 
+import com.example.validationdemo.provider.StaffProvider;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,7 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@GroupSequenceProvider(StaffProvider.class)
 public class Staff {
   public interface EnableValidation  {}
   public interface NotEnableValidation {}

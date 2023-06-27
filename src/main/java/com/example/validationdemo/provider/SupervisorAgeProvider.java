@@ -18,16 +18,6 @@ public class SupervisorAgeProvider implements DefaultGroupSequenceProvider<Super
     defaultGroupSequence.add(Supervisor.class);
     if (supervisor != null && (supervisor.getAge() >= 20 && supervisor.getAge() <= 60 )) {
       defaultGroupSequence.add(Supervisor.StaffValidation.class);
-      defaultGroupSequence.add(Staff.class);
-      Optional.ofNullable(supervisor.getStaff())
-          .map(Staff::getIsEnable)
-          .ifPresent(value -> {
-            if (value.equals("Y")) {
-              defaultGroupSequence.add(Staff.EnableValidation.class);
-            } else if (value.equals("N")) {
-              defaultGroupSequence.add(Staff.NotEnableValidation.class);
-            }
-          });
     }
     return defaultGroupSequence;
   }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @RestController
 @RequestMapping("/form")
@@ -26,7 +27,7 @@ public class FormController {
   }
 
   @PostMapping("/typeError")
-  public ResponseEntity<Object> formTypeError(@RequestParam(value = "id") Integer id) {
+  public ResponseEntity<Object> formTypeError(@Pattern(regexp = "^[/d]$") @RequestParam(value = "id") Integer id) {
     return ResponseEntity.ok(Result.success(id));
   }
 

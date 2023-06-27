@@ -34,8 +34,6 @@ public class Supervisor {
   private String phone;
   @NotNull(message = "年紀不能得空")
   private Integer age;
-  //因內嵌的Valid不能分群,所以需要配合ConvertGroup使用
-  @Valid
   @NotNull(message = "職員不得為空",groups = StaffValidation.class)
   private Staff staff;
   public interface StaffValidation {}

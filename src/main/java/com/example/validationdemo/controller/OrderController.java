@@ -62,7 +62,7 @@ public class OrderController {
    */
   @GetMapping("/{id}")
   public ResponseEntity<Object> getById(@PathVariable("id")
-                                          @Pattern(regexp = "^[/d]$", message = "需要是數字") String id) {
+                                          @Pattern(regexp = "^[/d]$", message = "需要是數字") Long id) {
     return ResponseEntity.ok(Result.success(id));
   }
 
@@ -82,7 +82,7 @@ public class OrderController {
    * 分群則需要再加上method上
    */
   @PostMapping("/list")
-//  @Validated(Order.Insert.class)
+  @Validated(Order.Insert.class)
   public ResponseEntity<Object> list(@Valid @RequestBody List<Order> orderList){
     return  ResponseEntity.ok(Result.success(orderList));
   }
@@ -101,17 +101,15 @@ public class OrderController {
   @PostMapping("/bindError")
   public ResponseEntity<Object> bindError(@Validated @RequestBody Order order, BindingResult bindingResult
                                           ){
-    log.info("bindingResult.getAllErrors()",bindingResult.getAllErrors());
-    log.info("bindingResult.hasErrors()",bindingResult.hasErrors());
-    log.info("bindingResult.getErrorCount()",bindingResult.getErrorCount());
-
-    if (bindingResult.hasErrors()) {
-      //do something and then
-      throw new ProjectException(bindingResult.getAllErrors()
-          .stream().map(FieldError.class::cast)
-          .map(FieldError::getDefaultMessage)
-          .collect(Collectors.joining(",")),"400");
-    }
+    System.out.println(bindingResult);
+    List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+//    if (bindingResult.hasErrors()) {
+//      //do something and then
+//      throw new ProjectException(bindingResult.getAllErrors()
+//          .stream().map(FieldError.class::cast)
+//          .map(FieldError::getDefaultMessage)
+//          .collect(Collectors.joining(",")),"400");
+//    }
 
     return  ResponseEntity.ok(Result.success(order));
   }

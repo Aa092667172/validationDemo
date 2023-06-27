@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @Validated
 public class AuthController {
   @PostMapping
-  public ResponseEntity<Object> insert(@Valid @RequestBody Auth auth){
+  public ResponseEntity<Object> insert(@Validated @RequestBody Auth auth){
     return ResponseEntity.ok(Result.success(auth));
   }
 }
