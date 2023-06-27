@@ -29,13 +29,10 @@ public class Book {
     Book book = Book.builder()
         .price(600)
         .build();
+
     Set<ConstraintViolation<Book>> violations = validator.validate(book);
-    if (!violations.isEmpty()) {
-      for (ConstraintViolation<Book> violation : violations) {
-        System.out.println(violation.getMessage());
-      }
-    } else {
-      System.out.println("Validation successful.");
+    for (ConstraintViolation<Book> violation : violations) {
+      System.out.println(violation.getMessage());
     }
 
   }
