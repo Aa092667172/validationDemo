@@ -1,20 +1,21 @@
 package com.example.validationdemo.dto;
 
-import com.example.validationdemo.provider.StaffProvider;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.group.GroupSequenceProvider;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.groups.Default;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
-@GroupSequenceProvider(StaffProvider.class)
 public class Staff {
-  public interface EnableValidation extends Default {}
-  public interface NotEnableValidation extends Default{}
+  public interface EnableValidation  {}
+  public interface NotEnableValidation {}
 
   @NotNull(message = "員工狀態啟用中,地址為必填",groups = EnableValidation.class)
   private String address;

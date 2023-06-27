@@ -1,7 +1,9 @@
 package com.example.validationdemo.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -14,6 +16,8 @@ import java.util.Set;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book {
   @NotEmpty(message = "書名不得為空")
   private String name;

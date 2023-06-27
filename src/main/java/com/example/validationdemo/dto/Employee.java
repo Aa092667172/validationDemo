@@ -1,11 +1,15 @@
 package com.example.validationdemo.dto;
 
 import com.example.validationdemo.annotation.Password;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Employee {
   private Long id;
   @NotBlank(message = "名稱不得為空白")

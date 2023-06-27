@@ -1,6 +1,8 @@
 package com.example.validationdemo.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -9,6 +11,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Auth {
   @NotNull(message = "作者姓名不得為空")
   private String name;

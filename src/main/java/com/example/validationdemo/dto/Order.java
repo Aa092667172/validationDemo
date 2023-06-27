@@ -1,6 +1,8 @@
 package com.example.validationdemo.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
@@ -13,6 +15,8 @@ import javax.validation.groups.Default;
 import java.math.BigDecimal;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order {
   /**
    * insert驗證群組
