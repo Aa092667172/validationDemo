@@ -19,7 +19,6 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Validated
 public class Book {
 
   public interface OnlyPrice{}

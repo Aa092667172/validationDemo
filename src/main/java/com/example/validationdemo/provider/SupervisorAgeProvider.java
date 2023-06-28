@@ -14,11 +14,12 @@ import java.util.Optional;
 public class SupervisorAgeProvider implements DefaultGroupSequenceProvider<Supervisor> {
   @Override
   public List<Class<?>> getValidationGroups(Supervisor supervisor) {
-    List<Class<?>> defaultGroupSequence = new ArrayList<>();
+    final List<Class<?>> defaultGroupSequence = new ArrayList<>();
     defaultGroupSequence.add(Supervisor.class);
-    if (supervisor != null && (supervisor.getAge() >= 20 && supervisor.getAge() <= 60 )) {
-      defaultGroupSequence.add(Supervisor.StaffValidation.class);
-    }
+    Optional.ofNullable(supervisor)
+        .map(Supervisor::getAge)
+        .filter(value -> value >= 20 && value <= 60)
+        .ifPresent(value -> defaultGroupSequence.add(Supervisor.StaffValidation.class));
     return defaultGroupSequence;
   }
 }

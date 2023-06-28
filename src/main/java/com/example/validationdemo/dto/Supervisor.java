@@ -35,6 +35,8 @@ public class Supervisor {
   @NotNull(message = "年紀不能得空")
   private Integer age;
   @NotNull(message = "職員不得為空",groups = StaffValidation.class)
+  @Valid
+  @ConvertGroup(from = StaffValidation.class,to = Staff.class)
   private Staff staff;
   public interface StaffValidation {}
 
