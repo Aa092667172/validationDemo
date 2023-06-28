@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -18,11 +19,15 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Validated
 public class Book {
+
+  public interface OnlyPrice{}
+
   @NotEmpty(message = "書名不得為空")
   private String name;
-  @Max(message = "書本金額不得高於{value}",value = 300)
-  @NotNull(message = "金額不得為null")
+  @Max(message = "書本金額不得高於{value}",value = 300,groups = OnlyPrice.class)
+  @NotNull(message = "金額不得為null",groups = OnlyPrice.class)
   private Integer price;
 
   /**

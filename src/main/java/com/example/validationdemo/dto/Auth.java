@@ -3,12 +3,14 @@ package com.example.validationdemo.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.validation.groups.ConvertGroup;
 import java.util.List;
 @Data
 @AllArgsConstructor
@@ -23,7 +25,10 @@ public class Auth {
   @Size(message = "書本集合1需介於{min}與{max}之間",min = 1,max = 3)
   @NotEmpty(message = "bookList不得為null")
   private List<Book> bookList;
+
+  //Valid搭配 ConvertGroup可做到嵌套分群
   @Valid
+  @ConvertGroup(to = Book.OnlyPrice.class)
   @Size(message = "書本集合2長度不得高於{max}",max = 3)
   private List<Book> bookList2;
 }
