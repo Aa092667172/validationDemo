@@ -19,7 +19,7 @@ public class Staff {
   public interface EnableValidation  {}
   public interface NotEnableValidation {}
 
-  @NotNull(message = "員工狀態啟用中,地址為必填",groups = EnableValidation.class)
+  @NotNull(message = "員工狀態啟用中,地址為必填",groups = {EnableValidation.class})
   private String address;
   @NotNull(message = "員工狀態啟用中,姓名為必填",groups = EnableValidation.class)
   private String name;
